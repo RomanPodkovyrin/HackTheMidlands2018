@@ -13,7 +13,7 @@
 # precipProb -> precipProbability
 # precipAcc -> precipAccumulation
 class WeightSystem:
-    # High humidity - 90, low humidity - 70
+    
     def __init__(self, windSpeed, precipInts, precipType, precipAcc, precipProb, nearestStormDistance, temperature, uvIndex, humidity):
 
         
@@ -39,19 +39,24 @@ class WeightSystem:
 
     # If statement based weighting calculation
     def sunWeightCalc(self):
-        # It is cold if temperature is less than 59, otherwise its most likely to be hot
-        if self.temperature >= 59:
+     
+        # High humidity - 90, low humidity - 70 
+        if self.temperature >= 59 and self.humidity >= 0.8:
+            self.weatherDictionary["Sun"] += 2
+        
+        if self.temperature >= 59 and self.humidity < 0.8:
             self.weatherDictionary["Sun"] += 1
-            
-        if self.temperature >= 59:
-           self.weatherDictionary["Sun"] += 1
+        
         
         
     
     def coldWeightCalc(self):
-        if self.temperature >= 59:
+        if self.temperature < 59 and self.humidity >= 0.8:
+            self.weatherDictionary["Cold"] += 2
+            self.weatherDictionary["Snow"] += 0.5
+        if self.temperature <= 59 and self.humidity < 0.8:
             self.weatherDictionary["Cold"] += 1
-            self.weatherDictionary["Snow"] += 1
+            self.weatherDictionary["Snow"] += 0.5
            
     def snowWeightCalc(self):
         # Check precipIntensity is present?
@@ -79,9 +84,6 @@ class WeightSystem:
         if self.windSpeed > 25:
             self.weatherDictionary["Wind"] += 1
            
-
-    
-
     # Function to process the weights
     def processWeights(self):
         self.sunWeightCalc()
@@ -90,30 +92,6 @@ class WeightSystem:
         self.rainWeightCalc()
         self.windWeightCalc()
 
-    # Get the weather condition based on the weights
-    
-
-
-    # Methods to get the value of the weights
-    def getSunWeight(self):
-        return (self.sunWeight,"sun")
-    def getColdWeight(self):
-        return (self.coldWeight, "cold")
-    def getSnowWeight(self):
-        return (self.snowWeight, "snow")
-    def getRainWeight(self):
-        return (self.rainWeight, "rain")
-    def getWindWeight(self):
-        return (self.windWeight, "wind")
-    
-
-    # Methods to reset all weights
-    def resetWeights(self):
-        self.sunWeight = 0
-        self.coldWeight = 0
-        self.snowWeight = 0
-        self.rainWeight = 0
-        self.windWeight = 0
 
     def getDictionary(self):
         return self.weatherDictionary
@@ -131,6 +109,7 @@ weights = WeightSystem(16.09, 0, "rain", None, 0.01, 60, 55.4, 1, 0.73)
 weights.processWeights()
 #  Returns a list of the weather(s) with the highest weighting
 print(weights.getWeather())
+print(weights.getDictionary())
 
 
 
