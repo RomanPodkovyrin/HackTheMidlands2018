@@ -5,20 +5,31 @@
     <meta charset="UTF-8">
     <title>Whether Weather</title>
     <script type = "text/javascript" 
-         src = "{{ url_for('static', filename = 'coordinates.js') }}" ></script>
-    <link rel="stylesheet" href="static/main.css">
+      src = "{{ url_for('static', filename = 'coordinates.js') }}" ></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'main.css') }}">
   </head>
 
   <body>
-    <h1>Whether Weather</h1>
-    
-    <div id="weather-data">
+    <div class="grid-container">
+
+      <div class="header">
+        <h1>Whether Weather</h1>
+      </div>
+
+      <div class="weather-data">
         <h2>Weather data</h2>
         <p>//weather data goes here</p>
-    </div>
-    <div id="processed">
+      </div>
+
+      <div class="processed-data">
         <h2>What to wear</h2>
         <p>//processed data goes here</p>
+      </div>
+
+      <div class="footer">
+        <p>This is the footer.</p>
+      </div>
+
     </div>
   </body>
 
