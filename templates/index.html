@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <meta charset="UTF-8">
     <title>Whether Weather</title>
+    <script type = "text/javascript" 
+         src = "{{ url_for('static', filename = 'coordinates.js') }}" ></script>
+    <link rel="stylesheet" href="static/main.css">
   </head>
+
   <body>
     <h1>Whether Weather</h1>
     
@@ -16,4 +21,5 @@
         <p>//processed data goes here</p>
     </div>
   </body>
+
 </html>
