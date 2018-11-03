@@ -1,32 +1,25 @@
-.grid-container {
-    display: grid;
-    grid-template-areas: "hd hd"
-                         "wd pd"
-                         "ft ft";
-    font-family: Arial, Helvetica, sans-serif;
-    grid-gap: 0.5em 0.5em
-}
-
-.header {
-    grid-area: hd;
-    text-align: center;
-    background-color: blue;
-    height: 100%;
+.nav-bar {
+    background-color: #34495e;
+    color: white;
+    font-size: 3rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
 .weather-data {
-    grid-area: wd;
-    height: 100%;
-    background-color: red;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 .processed-data {
-    grid-area: pd;
-    background-color: red;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
-.footer {
-    grid-area: ft;
-    background-color: blue;
+footer {
+    background-color:#34495e;
+    text-align: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    color: white;
 }
-
