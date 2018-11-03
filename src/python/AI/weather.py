@@ -8,10 +8,11 @@ from sklearn.metrics import confusion_matrix
 from sklearn.externals import joblib
 print('Libraries Imported')
 
+
 #Creating Dataset and including the first row by setting no header as input
 dataset = pd.read_csv('data.csv', header = None)
 #Renaming the columns
-dataset.columns = ['temp', 'humi','preci cm','preci prob','f']
+dataset.columns = ['temp', 'humi','preci','wind','f']
 print('Shape of the dataset: ' + str(dataset.shape))
 print(dataset.head())
 
@@ -48,8 +49,9 @@ classifier.fit(X_train, y_train)
 # Predicting the Test set results
 y_pred = classifier.predict(X_test)
 print("Heeeeeello",X_test, y_pred)
+
 #Reverse factorize (converting y_pred from 0s,1s and 2s to Iris-setosa, Iris-versicolor and Iris-virginica
-reversefactor = dict(zip(range(3),definitions))
+reversefactor = dict(zip(range(10),definitions))
 y_test = np.vectorize(reversefactor.get)(y_test)
 y_pred = np.vectorize(reversefactor.get)(y_pred)
 # Making the Confusion Matrix
@@ -59,7 +61,9 @@ print(pd.crosstab(y_test, y_pred, rownames=['Actual feel'], colnames=['Predicted
 print(list(zip(dataset.columns[0:4], classifier.feature_importances_)))
 joblib.dump(classifier, 'randomforestmodel.pkl')
 
-test = [[15.0,30,0.4,1.3]]
+
+
+test = [[-1.0,30,0.4,1.3]]
 print(test)
 test = scaler.transform(test)
 print(classifier.predict(test))
