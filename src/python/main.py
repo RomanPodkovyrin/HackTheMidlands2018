@@ -19,8 +19,10 @@ def main():
     print ('Temperature: ', current.temperature, current.humidity)
     #populateWeatherDataClass(current)
     #getHourlyWeather()
-    #getFlags()
-    getCurrentWeather()
+    getFlags()
+    #getCurrentWeather()
+    #getMinutalyWeather()
+    #getDailyWeather()
 
 def populateWeatherDataClass(weatherTimeForecast):
     datalist= []
@@ -73,8 +75,7 @@ def getHourlyWeather():
                 extra = "" + time
                 print("   "+item + ':' + str(hourly.get_hour(hour)[item]) + " " + extra)
     else:
-        print('No Hourly data'
-              '')
+        print('No Hourly data')
 
 def getFlags():
     if myID.has_flags() is True:
@@ -95,15 +96,52 @@ def getCurrentWeather():
             if item == 'time':
                 time = datetime.utcfromtimestamp(currently.get()[item]).strftime('%H:%M:%S %d-%m-%Y ')
             extra = "" + time
-            print(item + ' : ' + unicode(currently.get()[item]) + " " + extra)
+            print("   "+item + ' : ' + unicode(currently.get()[item]) + " " + extra)
         # Or access attributes directly
         print(currently.temperature)
         print(currently.humidity)
     else:
         print('No Currently data')
 def getMinutalyWeather():
-    pass
+    if myID.has_minutely() is True:
+        minutely = FIOMinutely.FIOMinutely(myID)
+        print('Minutely')
+        print('Summary:', minutely.summary)
+        print('Icon:', minutely.icon)
+
+        for minute in range(0, minutely.minutes()):
+            print('Minute', minute + 1)
+            for item in minutely.get_minute(minute).keys():
+                time = ""
+                if item == 'time':
+                    time = datetime.utcfromtimestamp(minutely.get_minute(minute)[item]).strftime('%H:%M:%S %d-%m-%Y ')
+                extra = "" + time
+                print("   "+item + ' : ' + unicode(minutely.get_minute(minute)[item]) + " " + extra)
+
+            # Or access attributes directly for a given minute.
+            # minutely.minute_3_time would also work
+            print(minutely.minute_1_time)
+    else:
+        print('No Minutely data')
 def getDailyWeather():
-    pass
+    if myID.has_daily() is True:
+        daily = FIODaily.FIODaily(myID)
+        print('Daily')
+        print('Summary:', daily.summary)
+        print('Icon:', daily.icon)
+
+        for day in range(0, daily.days()):
+            print('Day', day + 1)
+            for item in daily.get_day(day).keys():
+                time = ""
+                if item == 'time':
+                    time = datetime.utcfromtimestamp(daily.get_day(day)[item]).strftime('%H:%M:%S %d-%m-%Y ')
+                extra = "" + time
+                print("   "+item + ' : ' + str(daily.get_day(day)[item]) + " " + extra)
+            # Or access attributes directly for a given minute.
+            # daily.day_7_time would also work
+            print(daily.day_5_time)
+    else:
+        print('No Daily data')
 
 main()
