@@ -2,10 +2,11 @@ import csv
 import random
 import requests
 from decimal import Decimal
+import key
 
 # Darksky API handling
 #api_key = 'fddb1aa2d4034f6d105a0dd0defd9cd2'
-api_key = '99becfa067a9f55b1cfea2d0dfa84ed7'
+api_key = key.getKey()
 lon = 52.478856
 lat = -1.892302
 api_url = 'https://api.darksky.net/forecast/%s/%f,%f,' % (api_key, lon, lat) 
