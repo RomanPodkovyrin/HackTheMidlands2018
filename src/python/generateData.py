@@ -1,18 +1,33 @@
 import csv
 import random
-api_key = 'fddb1aa2d4034f6d105a0dd0defd9cd2'
-with open('synthetic_data.csv', mode='w') as datafile:
+import requests
 
+# Darksky API handling
+api_key = 'fddb1aa2d4034f6d105a0dd0defd9cd2'
+lon = 52.478856
+lat = -1.892302
+api_url = 'https://api.darksky.net/forecast/%s/%f,%f,' % (api_key, lon, lat) 
+
+# CSV Data Handling
+datafile = open('synthetic_data.csv', mode='w') 
 data_writer = csv.writer(datafile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
-fromvalue = 1262304000 #01/01/2010 @ 12:00am (UTC)
-tovalue = 1541286798    #11/03/2018 @ 11:13pm (UTC)
-
-
+# Data Generation Handling
+initial_date = 1388577600 #01/01/2014 @ 12:00am (UTC)
 for i in range (400):
-    randomUnix = random.randint(fromvalue,tovalue)
-    temp =
-    humidity=
-    preci=
-    wind=
-    data_writer.writerow(['John Smith', 'Accounting', 'November'])
+    final_api_url = '%s%d' % (api_url, initial_date)
+    r = requests.get(final_api_url)
+    data = r.json()
+
+    temp     = data['currently']['temperature']
+    humidity = data['currently']['humidity']
+    preci    = data['currently']['precipProbability']
+    wind     = data['currently']['windSpeed']
+    data_writer.writerow([initial_date, temp, humidity, preci, wind])
+
+    print('writing information for ' + str([initial_date, temp, humidity, preci, wind]))
+    
+    # Get the data for the next day
+    # This will ensure that we get data for the next 400 days
+    # This means that all 4 seasons will be counted for
+    initial_date = initial_date + (24*60*60)

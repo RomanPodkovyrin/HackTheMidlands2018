@@ -1,0 +1,25 @@
+.nav-bar {
+    background-color: #34495e;
+    color: white;
+    font-size: 3rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.weather-data {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.processed-data {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+footer {
+    background-color:#34495e;
+    text-align: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    color: white;
+}
