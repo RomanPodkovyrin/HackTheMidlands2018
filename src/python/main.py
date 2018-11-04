@@ -39,7 +39,7 @@ def getData(latitude, longitude):
         #print(hourly.icon)
         icon = hourly.icon
         hours = []
-        for hour in range (0,hourly.hours()):
+        for hour in range (1,hourly.hours()):
             #print('Hour', hour+1)
             time = hourly.get_hour(hour)["time"]
             precipIntensity = hourly.get_hour(hour)["precipIntensity"]

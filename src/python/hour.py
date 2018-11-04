@@ -26,5 +26,5 @@ class Hour:
         elif self.layer == 4:
             feel = "Hot"
 
-        return    "\nTime: " + str(self.time) +"    Layer: " +str(feel) +  "\n    precipIntensity: "+  str(self.precipIntensity) + "\n    precipProbability: " + str(self.precipProbability) + "\n    Temperature: " + str(self.temperature) +"\n    Humidity: " + str(self.humidity) + "\n    WindSpeed: " + str(self.windSpeed)
-
+        #return    "\nTime: " + str(self.time) +"    Layer: " +str(feel) +  "\n    precipIntensity: "+  str(self.precipIntensity) + "\n    precipProbability: " + str(self.precipProbability) + "\n    Temperature: " + str(self.temperature) +"\n    Humidity: " + str(self.humidity) + "\n    WindSpeed: " + str(self.windSpeed)
+        return '\nTime:  '+ str(self.time) + '   Layer: ' +str(feel)
