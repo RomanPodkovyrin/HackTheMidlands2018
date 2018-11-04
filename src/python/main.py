@@ -1,8 +1,10 @@
 from forecastiopy import *
 from idna import unicode
 import csv
-import key
 from datetime import datetime
+from hour import Hour
+from weatherData import WeatherData
+import key
 
 #api_key = 'fddb1aa2d4034f6d105a0dd0defd9cd2'
 #api_key =
@@ -12,21 +14,54 @@ longitude = -1.892302
 myID =""
 
 def main():
-    global myID
-    myID = ForecastIO.ForecastIO(api_key,
-                                 units = ForecastIO.ForecastIO.UNITS_UK,
-                                 lang = ForecastIO.ForecastIO.LANG_ENGLISH,
-                                 latitude = latitude, longitude =longitude)
-
-    current = FIOCurrently.FIOCurrently(myID)
-    print ('Temperature: ', current.temperature, current.humidity)
-    #populateWeatherDataClass(current)
     #getHourlyWeather()
     #getFlags()
     #getCurrentWeather()
     #getMinutalyWeather()
     #getDailyWeather()
-    predict()
+    getData()
+
+def setup():
+    global myID , latitude,longitude
+
+    latitude, longitude = key.getLocation()
+
+    myID = ForecastIO.ForecastIO(api_key,
+                                 units=ForecastIO.ForecastIO.UNITS_UK,
+                                 lang=ForecastIO.ForecastIO.LANG_ENGLISH,
+                                 latitude=latitude, longitude=longitude)
+def getData():
+
+    setup()
+    if myID.has_hourly() is True:
+        hourly = FIOHourly.FIOHourly(myID)
+        #print(hourly.summary)
+        summary = hourly.summary
+        #print(hourly.icon)
+        icon = hourly.icon
+        hours = []
+        for hour in range (0,hourly.hours()):
+            print('Hour', hour+1)
+            time = hourly.get_hour(hour)["time"]
+            precipIntensity = hourly.get_hour(hour)["precipIntensity"]
+            precipProbability = hourly.get_hour(hour)["precipProbability"]
+            temperature = hourly.get_hour(hour)["temperature"]
+            humidity = hourly.get_hour(hour)["humidity"]
+            windSpeed = hourly.get_hour(hour)["windSpeed"]
+            layer = predict(temperature,humidity,precipIntensity,windSpeed)
+            hour = Hour(layer, time,precipIntensity,
+                        precipProbability,temperature,
+                        humidity,windSpeed)
+    else:
+        print('No Hourly data')
+
+    weather = WeatherData(None,None,None)
+
+    return weather
+
+def predict():
+    pass
+
 
 
 def getHourlyWeather():
@@ -34,6 +69,7 @@ def getHourlyWeather():
 
         hourly = FIOHourly.FIOHourly(myID)
         print(hourly.summary)
+        print(hourly.icon)
 
         for hour in range (0,hourly.hours()):
             print('Hour', hour+1)
@@ -112,9 +148,6 @@ def getDailyWeather():
             print(daily.day_5_time)
     else:
         print('No Daily data')
-
-def predict():
-    pass
 
 
 main()
