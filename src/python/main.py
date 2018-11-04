@@ -5,12 +5,11 @@ from datetime import datetime
 from hour import Hour
 from weatherData import WeatherData
 import key
+import AI.weather_classifier as c
 
 #api_key = 'fddb1aa2d4034f6d105a0dd0defd9cd2'
 #api_key =
 api_key = key.getKey()
-latitude = 52.478856
-longitude = -1.892302
 myID =""
 
 def main():
@@ -19,20 +18,20 @@ def main():
     #getCurrentWeather()
     #getMinutalyWeather()
     #getDailyWeather()
-    getData()
-
-def setup():
-    global myID , latitude,longitude
 
     latitude, longitude = key.getLocation()
+    getData(latitude,longitude)
 
+def setup(latitude,longitude):
+    global myID
     myID = ForecastIO.ForecastIO(api_key,
                                  units=ForecastIO.ForecastIO.UNITS_UK,
                                  lang=ForecastIO.ForecastIO.LANG_ENGLISH,
                                  latitude=latitude, longitude=longitude)
-def getData():
+def getData(latitude, longitude):
 
-    setup()
+    setup(latitude, longitude)
+
     if myID.has_hourly() is True:
         hourly = FIOHourly.FIOHourly(myID)
         #print(hourly.summary)
@@ -48,19 +47,24 @@ def getData():
             temperature = hourly.get_hour(hour)["temperature"]
             humidity = hourly.get_hour(hour)["humidity"]
             windSpeed = hourly.get_hour(hour)["windSpeed"]
+
+            print("Temperature", temperature)
             layer = predict(temperature,humidity,precipIntensity,windSpeed)
             hour = Hour(layer, time,precipIntensity,
                         precipProbability,temperature,
                         humidity,windSpeed)
+            hours.append(hour)
     else:
         print('No Hourly data')
 
-    weather = WeatherData(None,None,None)
+    weather = WeatherData(summary,icon,hours)
 
     return weather
 
-def predict():
-    pass
+def predict(temperature,humidity,precipIntensity,windSpeed):
+    scaler, classifier = c.train()
+    return c.predict(scaler, classifier, [[temperature,humidity,precipIntensity,windSpeed]])
+
 
 
 
