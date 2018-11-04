@@ -25,3 +25,11 @@ clone it and run
 ``` bash 
 python setup.py install
 ```
+
+###Run
+run 
+```python
+weather.py
+```
+then open 
+http://localhost:5000/
