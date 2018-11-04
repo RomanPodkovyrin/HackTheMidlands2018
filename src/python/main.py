@@ -3,7 +3,8 @@ from idna import unicode
 from weather_data import Weather_data
 from datetime import datetime
 
-api_key = 'fddb1aa2d4034f6d105a0dd0defd9cd2'
+#api_key = 'fddb1aa2d4034f6d105a0dd0defd9cd2'
+api_key = '99becfa067a9f55b1cfea2d0dfa84ed7'
 latitude = 52.478856
 longitude = -1.892302
 myID =""
