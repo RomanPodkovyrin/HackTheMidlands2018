@@ -11,6 +11,7 @@ def root():
 def recommend():
     lon = request.args.get('lon')
     lat = request.args.get('lat')
+    
     return ' Latitude: %s | Longitude: %s' % (lat, lon)
 
 if __name__ == '__main__':

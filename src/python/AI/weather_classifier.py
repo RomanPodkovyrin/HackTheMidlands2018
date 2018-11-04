@@ -6,24 +6,24 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import confusion_matrix
 from sklearn.externals import joblib
-print('Libraries Imported')
+#print('Libraries Imported')
 
 
 def main():
 
-    scaler, classifier = train()
+    #scaler, classifier = train()
 
     """test = [[27.23,0.53,0,3.31]]
     print(test)
     test = scaler.transform(test)
     print(classifier.predict(test))"""
 
-    predict(scaler, classifier, [[27.23, 0.53, 0, 3.31]])
+    #predict(scaler, classifier, [[27.23, 0.53, 0, 3.31]])
 
 
 def train():
     # Creating Dataset and including the first row by setting no header as input
-    dataset = pd.read_csv('src/python/data.csv', header=None)
+    dataset = pd.read_csv('data.csv', header=None)
     # naming the columns
     dataset.columns = ['temp', 'humi', 'preci', 'wind', 'feel']
     #print('Dataset shape: ' + str(dataset.shape))
@@ -34,7 +34,7 @@ def train():
     dataset.feel = factor[0]
     definitions = factor[1]
     #print(dataset.feel.head())
-    print("Definitions: ",definitions)
+    #print("Definitions: ",definitions)
 
     # Splitting the data into independent and dependent variables
     X = dataset.iloc[:, 0:4].values # first four columns are input values
@@ -82,10 +82,10 @@ def train():
 
 def predict(scaler,classifier, data):
     #data = [[27.23, 0.53, 0, 3.31]]
-    print(data)
+    #print(data)
     data = scaler.transform(data)
     predictions = classifier.predict(data)
-    print("predictions",predictions)
+    #print("predictions",predictions)
     return predictions
 
 main()
