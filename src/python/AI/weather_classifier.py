@@ -23,7 +23,7 @@ def main():
 
 def train():
     # Creating Dataset and including the first row by setting no header as input
-    dataset = pd.read_csv('AI/data.csv', header=None)
+    dataset = pd.read_csv('src/python/data.csv', header=None)
     # naming the columns
     dataset.columns = ['temp', 'humi', 'preci', 'wind', 'feel']
     #print('Dataset shape: ' + str(dataset.shape))

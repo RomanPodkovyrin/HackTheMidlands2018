@@ -2,10 +2,10 @@ from forecastiopy import *
 from idna import unicode
 import csv
 from datetime import datetime
-from hour import Hour
-from weatherData import WeatherData
-import key
-import AI.weather_classifier as c
+from src.python.hour import Hour
+from src.python.weatherData import WeatherData
+import src.python.key as key
+import src.python.AI.weather_classifier as c
 
 #api_key = 'fddb1aa2d4034f6d105a0dd0defd9cd2'
 #api_key =

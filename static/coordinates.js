@@ -1,14 +1,28 @@
 function onPositionReceived(position) {
-    console.log(position.coords.latitude);
-    console.log(position.coords.longitude);
-
-    console.log(position);
+    const longitude = position.coords.longitude
+    const latitude = position.coords.latitude
+    $.ajax({
+        type: 'GET',
+        url: '/recommend',
+        data: {
+            lon: longitude,
+            lat: latitude
+        },
+        success: function(resp) {
+            console.log(resp)
+        },
+        error: function() {
+            console.log('Error: cannot GET');
+        }
+    });
 }
 
 function locatonNotReceived(positionError) {
     console.log(positionError);
 }
 
-if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(onPositionReceived, locatonNotReceived);
-}
+$('document').ready(function() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(onPositionReceived, locatonNotReceived);
+    }
+});
