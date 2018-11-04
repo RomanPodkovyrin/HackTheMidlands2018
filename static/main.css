@@ -5,25 +5,30 @@ body {
 }
 
 .nav-bar {
-    background-color: #34495e;
+    background-color: rgba(25, 42, 86, 0.5);
     color: white;
     font-size: 3rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
 }
 
-.weather-data {
-    padding-left: 1rem;
-    padding-right: 1rem;
+#weather-data {
+    background-color: #f5f6fa;
+    height: 435px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
-.processed-data {
-    padding-left: 1rem;
-    padding-right: 1rem;
+#processed-data {
+    background-color: #f5f6fa;
+    height: 435px;
+    width: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 footer {
-    background-color:#34495e;
+    background-color: rgba(25, 42, 86, 0.5);
     text-align: center;
     padding-left: 1rem;
     padding-right: 1rem;
