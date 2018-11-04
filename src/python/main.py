@@ -20,8 +20,8 @@ def main():
     #getDailyWeather()
 
     latitude, longitude = key.getLocation()
-    getData(latitude,longitude)
-
+    report = getData(latitude,longitude)
+    print (report.getReport())
 def setup(latitude,longitude):
     global myID
     myID = ForecastIO.ForecastIO(api_key,
@@ -40,7 +40,7 @@ def getData(latitude, longitude):
         icon = hourly.icon
         hours = []
         for hour in range (0,hourly.hours()):
-            print('Hour', hour+1)
+            #print('Hour', hour+1)
             time = hourly.get_hour(hour)["time"]
             precipIntensity = hourly.get_hour(hour)["precipIntensity"]
             precipProbability = hourly.get_hour(hour)["precipProbability"]
@@ -48,7 +48,7 @@ def getData(latitude, longitude):
             humidity = hourly.get_hour(hour)["humidity"]
             windSpeed = hourly.get_hour(hour)["windSpeed"]
 
-            print("Temperature", temperature)
+            #print("Temperature", temperature)
             layer = predict(temperature,humidity,precipIntensity,windSpeed)
             hour = Hour(layer, time,precipIntensity,
                         precipProbability,temperature,
