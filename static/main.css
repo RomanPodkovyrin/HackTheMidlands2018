@@ -14,7 +14,7 @@ body {
 
 #weather-data {
     background-color: #f5f6fa;
-    height: 435px;
+    height: 500px;
     margin-top: 1rem;
     margin-bottom: 1rem;
     padding: 1rem 1rem;
@@ -22,7 +22,7 @@ body {
 
 #processed-data {
     background-color: #f5f6fa;
-    height: 435px;
+    height: 500px;
     width: auto;
     margin-top: 1rem;
     margin-bottom: 1rem;
