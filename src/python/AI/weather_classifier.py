@@ -63,6 +63,7 @@ def train():
     y_pred = classifier.predict(X_test)
     #print( X_test, y_pred)
 
+
     # Reverse factorize (converting y_pred from 0s,1s and 2s ... to labels  )
     reversefactor = dict(zip(range(10), definitions))
     y_test = np.vectorize(reversefactor.get)(y_test)
