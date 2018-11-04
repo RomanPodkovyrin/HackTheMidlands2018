@@ -7,9 +7,8 @@ import key
 # Darksky API handling
 #api_key = 'fddb1aa2d4034f6d105a0dd0defd9cd2'
 api_key = key.getKey()
-lon = 52.478856
-lat = -1.892302
-api_url = 'https://api.darksky.net/forecast/%s/%f,%f,' % (api_key, lon, lat) 
+latitude,longitude = key.getLocation()
+api_url = 'https://api.darksky.net/forecast/%s/%f,%f,' % (api_key, latitude,longitude)
 
 # CSV Data Handling
 datafile = open('synthetic_data.csv', mode='w') 
@@ -30,7 +29,7 @@ for i in range (400):
     temp     = data['currently']['temperature']
     temp     = round(tempFtoC(temp),2)
     humidity = data['currently']['humidity']
-    preci    = data['currently']['precipProbability']
+    preci    = data['currently']['precipIntensity']
     wind     = data['currently']['windSpeed']
     data_writer.writerow([ temp, humidity, preci, wind])
 

@@ -1,6 +1,5 @@
-class HourlyData:
+class WeatherData:
     def __init__(self, summary, icon, data):
         self.summary =  summary
         self.icon = icon
-
-        perHour = data
+        self.hour = data #array
