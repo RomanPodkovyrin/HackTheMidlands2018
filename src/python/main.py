@@ -21,7 +21,7 @@ def main():
 
     latitude, longitude = key.getLocation()
     report = getData(latitude,longitude)
-    print (report.getReport())
+    #print (report.getReport())
 def setup(latitude,longitude):
     global myID
     myID = ForecastIO.ForecastIO(api_key,
@@ -59,7 +59,7 @@ def getData(latitude, longitude):
 
     weather = WeatherData(summary,icon,hours)
 
-    return weather
+    return weather.getReport()
 
 def predict(temperature,humidity,precipIntensity,windSpeed):
     scaler, classifier = c.train()
@@ -154,4 +154,4 @@ def getDailyWeather():
         print('No Daily data')
 
 
-main()
+#main()

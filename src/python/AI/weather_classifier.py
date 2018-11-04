@@ -73,9 +73,9 @@ def train():
 
     #print(list(zip(dataset.columns[0:4], classifier.feature_importances_)))
     # dumps classifier to a file
-    joblib.dump(classifier, 'randomforestmodel.pkl')
+    #joblib.dump(classifier, 'randomforestmodel.pkl')
     # dumps scaler to a file
-    joblib.dump(classifier, 'scaler.pkl')
+    #joblib.dump(classifier, 'scaler.pkl')
 
 
     return scaler, classifier
