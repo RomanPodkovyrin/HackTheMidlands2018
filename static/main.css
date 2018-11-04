@@ -17,6 +17,7 @@ body {
     height: 435px;
     margin-top: 1rem;
     margin-bottom: 1rem;
+    padding: 1rem 1rem;
 }
 
 #processed-data {
@@ -25,6 +26,7 @@ body {
     width: auto;
     margin-top: 1rem;
     margin-bottom: 1rem;
+    padding: 1rem 1rem;
 }
 
 footer {
