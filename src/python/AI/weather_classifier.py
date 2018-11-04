@@ -23,26 +23,26 @@ def main():
 
 def train():
     # Creating Dataset and including the first row by setting no header as input
-    dataset = pd.read_csv('data.csv', header=None)
+    dataset = pd.read_csv('AI/data.csv', header=None)
     # naming the columns
     dataset.columns = ['temp', 'humi', 'preci', 'wind', 'feel']
-    print('Dataset shape: ' + str(dataset.shape))
-    print(dataset.head())
+    #print('Dataset shape: ' + str(dataset.shape))
+    #print(dataset.head())
 
     # Converts classes to numerical values
     factor = pd.factorize(dataset['feel'])
     dataset.feel = factor[0]
     definitions = factor[1]
-    print(dataset.feel.head())
+    #print(dataset.feel.head())
     print("Definitions: ",definitions)
 
     # Splitting the data into independent and dependent variables
     X = dataset.iloc[:, 0:4].values # first four columns are input values
     y = dataset.iloc[:, 4].values # last columns are the classes of the data
-    print('The independent features set: ')
-    print(X[:5, :])
-    print('The dependent variable: ')
-    print(y[:5])
+    #print('The independent features set: ')
+    #print(X[:5, :])
+    #print('The dependent variable: ')
+    #print(y[:5])
 
     # splits data into training and test data
     # if have enough data set test_size to 0.1
@@ -51,7 +51,7 @@ def train():
     # Scaling
     scaler = StandardScaler()
     X_train = scaler.fit_transform(X_train)
-    print( X_test[0])
+    #print( X_test[0])
     # scales the input datas
     X_test = scaler.transform(X_test)
 
@@ -61,7 +61,7 @@ def train():
 
     # Predicting the Test set results
     y_pred = classifier.predict(X_test)
-    print( X_test, y_pred)
+    #print( X_test, y_pred)
 
     # Reverse factorize (converting y_pred from 0s,1s and 2s ... to labels  )
     reversefactor = dict(zip(range(10), definitions))
@@ -69,9 +69,9 @@ def train():
     y_pred = np.vectorize(reversefactor.get)(y_pred)
 
     # Making the Confusion Matrix
-    print(pd.crosstab(y_test, y_pred, rownames=['Actual feel'], colnames=['Predicted feel']))
+    #print(pd.crosstab(y_test, y_pred, rownames=['Actual feel'], colnames=['Predicted feel']))
 
-    print(list(zip(dataset.columns[0:4], classifier.feature_importances_)))
+    #print(list(zip(dataset.columns[0:4], classifier.feature_importances_)))
     # dumps classifier to a file
     joblib.dump(classifier, 'randomforestmodel.pkl')
     # dumps scaler to a file
@@ -79,10 +79,13 @@ def train():
 
 
     return scaler, classifier
+
 def predict(scaler,classifier, data):
     #data = [[27.23, 0.53, 0, 3.31]]
     print(data)
     data = scaler.transform(data)
-    print(classifier.predict(data))
+    predictions = classifier.predict(data)
+    print("predictions",predictions)
+    return predictions
 
 main()
