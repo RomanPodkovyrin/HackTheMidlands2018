@@ -1,5 +1,6 @@
 from forecastiopy import *
 from idna import unicode
+import csv
 import key
 from datetime import datetime
 
@@ -20,11 +21,12 @@ def main():
     current = FIOCurrently.FIOCurrently(myID)
     print ('Temperature: ', current.temperature, current.humidity)
     #populateWeatherDataClass(current)
-    getHourlyWeather()
+    #getHourlyWeather()
     #getFlags()
     #getCurrentWeather()
     #getMinutalyWeather()
     #getDailyWeather()
+    predict()
 
 
 def getHourlyWeather():
@@ -110,5 +112,9 @@ def getDailyWeather():
             print(daily.day_5_time)
     else:
         print('No Daily data')
+
+def predict():
+    pass
+
 
 main()
